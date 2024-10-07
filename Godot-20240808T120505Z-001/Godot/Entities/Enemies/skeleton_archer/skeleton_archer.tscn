@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxntvjhp6uac3"]
+
+[ext_resource type="PackedScene" uid="uid://bqp00cruiis0o" path="res://blueprintComponents/enemy_components/enemy.tscn" id="1_b6tl5"]
+[ext_resource type="Script" path="res://Entities/Enemies/skeleton_archer/skeleton_archer.gd" id="2_3qrdm"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fktd7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ea3nv"]
+size = Vector2(20, 22)
+
+[node name="SkeletonArcher" instance=ExtResource("1_b6tl5")]
+position = Vector2(4, 0)
+script = ExtResource("2_3qrdm")
+
+[node name="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_fktd7")
+
+[node name="CollisionShape2D" parent="Weapon" index="0"]
+position = Vector2(26, -31)
+shape = SubResource("RectangleShape2D_ea3nv")
+
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(-4, -31)
+
+[node name="HealtBar" parent="." index="5"]
+offset_left = -19.0
+offset_top = -72.0
+offset_right = 11.0
+offset_bottom = -68.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Timer" parent="EnemyStateMachine/Patrol" index="0"]
+wait_time = 5.0
+
+[node name="Attack" parent="EnemyStateMachine" index="3"]
+can_move = true
+
+[node name="Label" parent="." index="7"]
+offset_left = -54.0
+offset_top = -95.0
+offset_right = 40.0
+offset_bottom = -72.0
+
+[node name="DetectArea" parent="." index="8"]
+collision_layer = 8
